@@ -1,0 +1,11 @@
+<h1><%= @blog.title %></h1>
+
+<div class="row">
+  <div class="col-sm-5">
+    <p>作者: <%= @blog.user.username %>, <%= @blog.created_at %></p>
+    <%= @blog.content %>
+  </div>
+
+  <div class="col-sm-7">
+  </div>
+</div>

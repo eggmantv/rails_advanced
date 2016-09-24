@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Circles后台管理</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header name="top">
+      <nav class="navbar navbar-default navbar-fixed-top nav-color" role="navigation" id="nav">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header nav-color">
+            <button id="nav_collapse" type="button" class="navbar-toggle toggle-btn" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-controls="bs-navbar-collapse-1">
+              <span class="fa fa-bars fa-lg"></span>
+            </button>
+            <a class="navbar-brand custom-logo-link" href="/">
+              Circles后台管理
+            </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse nav-submenu-color collapse" id="bs-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right custom">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="<%= admin_users_path %>">用户管理</a>
+              </li>
+
+              <% if session[:user_id] %>
+                <li><%= link_to "#{User.find(session[:user_id]).username}, 退出", session_path(session[:user_id]), method: 'delete' %></li>
+              <% else %>
+                <li><%= link_to "登录", new_session_path %></li>
+              <% end -%>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-->
+      </nav>
+    </header>
+
+    <div class="container body-offset">
+      <% if flash[:notice] %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
+      <% end -%>
+      
+      <%= yield %>
+    </div>
+  </body>
+</html>

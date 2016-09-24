@@ -1,0 +1,24 @@
+<h1>好友</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th></th>
+      </tr>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td><%= friend.id %></td>
+          <td><%= friend.username %></td>
+          <td>
+            
+          </td>
+        </tr>
+      <% end -%>
+    </table>
+
+    <%= will_paginate @friends %>
+  </div>
+</div>

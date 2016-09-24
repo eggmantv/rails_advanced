@@ -1,0 +1,12 @@
+<h1><%= current_user.username %>的博客</h1>
+
+<div>
+  <%= link_to "创建博客", new_blog_path, class: "btn btn-primary" %> 
+  <%= link_to "我的博客", blogs_user_path(current_user), class: "btn btn-default" %>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= render 'blogs/blogs' %>
+  </div>
+</div>

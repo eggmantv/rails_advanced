@@ -1,0 +1,38 @@
+<h1><%= @blog.new_record? ? '创建' : '编辑' %>博客</h1>
+
+<div class="row">
+  <div class="col-sm-5">
+    <%= form_for @blog, url: (@blog.new_record? ? blogs_path : blog_path(@blog)), method: (@blog.new_record? ? :post : :put) do |f| %>
+      <div class="form-group">
+        <ul class="list-unstyled">
+          <% @blog.errors.messages.values.flatten.each do |error| %>
+            <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+          <% end -%>
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :title, class: "form-control", placeholder: "标题" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_area :content, class: "form-control", placeholder: "内容" %>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="blog[tags_string]" value="<%= @blog.tags.map(&:title).join(',') %>" /><small>标签以逗号分隔</small>
+      </div>
+
+      <div class="form-group">
+        <% [[true, "显示"], [false, "不显示"]].each do |public| %>
+          <input type="radio" name="blog[is_public]" value="<%= public.first %>" <%= 'checked' if @blog.is_public == public.first %> /> <%= public.last %>
+        <% end -%>
+      </div>      
+
+      <%= f.submit "保存", class: "btn btn-primary" %> 
+    <% end -%>
+  </div>
+
+  <div class="col-sm-7">
+  </div>
+</div>

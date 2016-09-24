@@ -1,0 +1,12 @@
+development: &default
+  domain: "localhost"
+
+production:
+  domain: "www.343edu.com"
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+  domain: "dev.343edu.com"

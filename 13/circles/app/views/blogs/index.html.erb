@@ -1,0 +1,31 @@
+<h1>博客</h1>
+
+<div>
+  <%= link_to "创建博客", new_blog_path, class: "btn btn-primary" %>
+  <% if logged_in? %>
+    <%= link_to "我的博客", blogs_user_path(current_user), class: "btn btn-default" %>
+  <% end -%>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>作者</th>
+      </tr>
+      <% @blogs.each do |blog| %>
+        <tr>
+          <td><%= blog.id %></td>
+          <td>
+            <%= link_to blog.title, blog_path(blog) %>  
+          </td>
+          <td><%= blog.user.username %></td>
+        </tr>
+      <% end -%>
+    </table>
+
+    <%= will_paginate @blogs %>
+  </div>
+</div>

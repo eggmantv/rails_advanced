@@ -1,0 +1,17 @@
+<h1>私信</h1>
+
+<div class="row">
+  <div class="col-sm-5">
+    <p>From: <%= @message.sender.username %></p>
+    <p>To: <%= @message.receiver.username %></p>
+    <p><%= @message.content %></p>
+  </div>
+
+  <% if @message.receiver == current_user %>
+    <p>
+      <%= link_to "回复", new_message_path(receiver_username: @message.sender.username) %>
+    </p>
+  <% end -%>
+  <div class="col-sm-7">
+  </div>
+</div>

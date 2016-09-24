@@ -1,0 +1,26 @@
+<h1>用户列表</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th></th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.username %></td>
+          <td>
+            <% unless current_user.is_friend_with?(user) %> 
+              <%= link_to "Add Friend", add_friend_users_path(friend_id: user.id), method: :post %>
+            <% end -%>
+          </td>
+        </tr>
+      <% end -%>
+    </table>
+
+    <%= will_paginate @users %>
+  </div>
+</div>

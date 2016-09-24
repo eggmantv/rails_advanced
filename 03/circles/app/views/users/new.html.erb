@@ -1,0 +1,23 @@
+<h1>用户注册</h1>
+
+<%= form_for @student, url: (@student.new_record? ? admin_students_path : admin_student_path(@student)), method: (@student.new_record? ? 'post' : 'put'), html: { class: 'form-horizontal subscribe-form' } do |f| %>
+  <div class="form-group">
+    <label for="username" class="col-sm-2 control-label">用户名:*</label>
+    <div class="col-sm-5">
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password" class="col-sm-2 control-label">密码:*</label>
+    <div class="col-sm-5">
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.submit "注册", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end -%>

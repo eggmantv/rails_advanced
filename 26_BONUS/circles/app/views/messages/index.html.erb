@@ -1,0 +1,36 @@
+<h1>私信</h1>
+
+<div>
+  <%= link_to "创建私信", new_message_path, class: "btn btn-primary" %>
+</div>
+
+<div>
+  <%= link_to "收件箱", messages_path, class: "btn btn-default" %> 
+  <%= link_to "发件箱", messages_path(type: 'outbox'), class: "btn btn-default" %> 
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th><%= params[:type] == 'inbox' ? "发件人" : "收件人" %></th>
+        <th>内容</th>
+        <th>已读</th>
+        <th></th>
+      </tr>
+      <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.id %></td>
+          <td><%= params[:type] == 'inbox' ? message.sender.username : message.receiver.username %></td>
+          <td><%= truncate message.content, length: 30 %></td>
+          <td><%= message.is_read_to_s %></td>
+          <td>
+            <%= link_to "详情", message_path(message) %>
+          </td>
+        </tr>
+      <% end -%>
+    </table>
+
+    <%= will_paginate @messages %>
+  </div>
+</div>
