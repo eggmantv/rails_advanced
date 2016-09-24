@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_one :latest_blog,  -> { order("id desc") }, class_name: :Blog
 
+  has_many :friendships
+  has_many :friends, through: :friendships, source: :friend
+
   before_save :update_username
 
   # attr_accessor :old_password
@@ -31,6 +34,15 @@ class User < ActiveRecord::Base
 
   def valid_password? password
     self.crypted_password == Digest::SHA256.hexdigest(password + self.salt)
+  end
+
+  def add_friend user
+    self.friends << user
+    user.friends << self
+  end
+
+  def is_friend_with? user
+    self.friendships.exists?(friend_id: user.id)
   end
 
   private

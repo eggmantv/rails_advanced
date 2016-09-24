@@ -26,17 +26,6 @@ class UsersController < ApplicationController
       .order("id desc")
   end
 
-  def add_friend
-    current_user.add_friend(User.find(params[:friend_id]))
-    flash[:notice] = "添加好成功"
-    redirect_to :back
-  end
-
-  def friends
-    @friends = current_user.friends.page(params[:page] || 1).per_page(params[:per_page] || 10)
-      .order("id desc")
-  end
-
   private
   def user_attrs
     params.require(:user).permit(:username, :password, :password_confirmation)

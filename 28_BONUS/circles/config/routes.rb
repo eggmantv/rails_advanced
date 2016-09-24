@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :users do
     get :blogs, on: :member
+    post :add_friend, on: :collection
+    get :friends, on: :collection
   end
   
   resources :sessions

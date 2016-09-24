@@ -34,6 +34,7 @@
               </li>
               <li><%= link_to "博客", blogs_path %></li>
               <li><%= link_to "私信", messages_path %></li>
+              <li><%= link_to "好友", friends_users_path %></li>
               <% if logged_in? %>
                 <li><%= link_to "#{current_user.username}, 退出", session_path(session[:user_id]), method: 'delete' %></li>
               <% else %>

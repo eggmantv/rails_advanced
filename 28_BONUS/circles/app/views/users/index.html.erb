@@ -12,7 +12,11 @@
         <tr>
           <td><%= user.id %></td>
           <td><%= user.username %></td>
-          <td></td>
+          <td>
+            <% unless current_user.is_friend_with?(user) %> 
+              <%= link_to "Add Friend", add_friend_users_path(friend_id: user.id), method: :post %>
+            <% end -%>
+          </td>
         </tr>
       <% end -%>
     </table>
